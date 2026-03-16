@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Online Shopping Survey – Step 2 of 3</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <header class="site-header">
+    <h1>🛒 Online Shopping Survey</h1>
+    <p class="subtitle">Tell us about your online shopping experience.</p>
+
+    <div class="progress-steps" aria-label="Survey progress">
+      <div class="step done">
+        <div class="step-circle">✓</div>
+        <span class="step-label">Your Details</span>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step active">
+        <div class="step-circle">2</div>
+        <span class="step-label">Shopping Habits</span>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step">
+        <div class="step-circle">3</div>
+        <span class="step-label">Preferences</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Card ───────────────────────────────────────── -->
+  <main class="card" role="main">
+    <h2 class="card-title">Your Shopping Habits &amp; Feedback</h2>
+    <p class="card-description">
+      Answer the questions below about your online shopping frequency and your
+      experience with delivery and payment systems.
+    </p>
+
+    <form id="step2Form" novalidate>
+
+      <!-- Q1 – Shopping frequency -->
+      <div class="form-group">
+        <label>1. How often do you prefer online shopping? <span class="required">*</span></label>
+        <div class="radio-group" id="freqGroup">
+          <label class="radio-option">
+            <input type="radio" name="frequency" value="Daily" />
+            <span class="option-text">Daily – I shop online almost every day</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="frequency" value="Weekly" />
+            <span class="option-text">Weekly – A few times every week</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="frequency" value="Monthly" />
+            <span class="option-text">Monthly – Once or a few times a month</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="frequency" value="Rarely" />
+            <span class="option-text">Rarely – Only on special occasions or sales</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="frequency" value="Never" />
+            <span class="option-text">Never – I don't shop online</span>
+          </label>
+        </div>
+        <p class="error-msg" id="freqError">Please select how often you shop online.</p>
+      </div>
+
+      <!-- Q2 – Delivery rating -->
+      <div class="form-group">
+        <label>2. How would you rate your overall online <strong>delivery</strong> experience? <span class="required">*</span></label>
+
+        <div class="star-rating" id="deliveryStars" role="group" aria-label="Delivery rating">
+          <input type="radio" name="deliveryRating" id="d5" value="5" /><label for="d5" title="Excellent">★</label>
+          <input type="radio" name="deliveryRating" id="d4" value="4" /><label for="d4" title="Good">★</label>
+          <input type="radio" name="deliveryRating" id="d3" value="3" /><label for="d3" title="Average">★</label>
+          <input type="radio" name="deliveryRating" id="d2" value="2" /><label for="d2" title="Poor">★</label>
+          <input type="radio" name="deliveryRating" id="d1" value="1" /><label for="d1" title="Very Poor">★</label>
+        </div>
+        <p class="error-msg" id="deliveryRatingError">Please rate your delivery experience.</p>
+      </div>
+
+      <!-- Q3 – Delivery feedback -->
+      <div class="form-group">
+        <label for="deliveryFeedback">3. Share your feedback on online delivery (packaging, speed, accuracy, etc.)</label>
+        <textarea
+          id="deliveryFeedback"
+          name="deliveryFeedback"
+          rows="3"
+          placeholder="What do you like or dislike about online delivery services?"
+          maxlength="500"
+        ></textarea>
+      </div>
+
+      <!-- Q4 – Payment rating -->
+      <div class="form-group">
+        <label>4. How would you rate your online <strong>payment</strong> experience? <span class="required">*</span></label>
+
+        <div class="star-rating" id="paymentStars" role="group" aria-label="Payment rating">
+          <input type="radio" name="paymentRating" id="p5" value="5" /><label for="p5" title="Excellent">★</label>
+          <input type="radio" name="paymentRating" id="p4" value="4" /><label for="p4" title="Good">★</label>
+          <input type="radio" name="paymentRating" id="p3" value="3" /><label for="p3" title="Average">★</label>
+          <input type="radio" name="paymentRating" id="p2" value="2" /><label for="p2" title="Poor">★</label>
+          <input type="radio" name="paymentRating" id="p1" value="1" /><label for="p1" title="Very Poor">★</label>
+        </div>
+        <p class="error-msg" id="paymentRatingError">Please rate your payment experience.</p>
+      </div>
+
+      <!-- Q5 – Payment feedback -->
+      <div class="form-group">
+        <label for="paymentFeedback">5. Share your feedback on online payments (UPI, cards, wallets, COD, etc.)</label>
+        <textarea
+          id="paymentFeedback"
+          name="paymentFeedback"
+          rows="3"
+          placeholder="What payment methods do you prefer? Any issues you've faced?"
+          maxlength="500"
+        ></textarea>
+      </div>
+
+      <!-- Q6 – Preferred payment method -->
+      <div class="form-group">
+        <label for="paymentMethod">6. What is your most preferred payment method? <span class="required">*</span></label>
+        <select id="paymentMethod" name="paymentMethod">
+          <option value="">— Select an option —</option>
+          <option value="UPI">UPI (Google Pay, PhonePe, Paytm, etc.)</option>
+          <option value="Credit Card">Credit Card</option>
+          <option value="Debit Card">Debit Card</option>
+          <option value="Net Banking">Net Banking</option>
+          <option value="Cash on Delivery">Cash on Delivery (COD)</option>
+          <option value="Buy Now Pay Later">Buy Now, Pay Later (BNPL)</option>
+          <option value="Digital Wallet">Digital Wallet</option>
+        </select>
+        <p class="error-msg" id="paymentMethodError">Please select your preferred payment method.</p>
+      </div>
+
+      <div class="btn-row">
+        <a href="index.html" class="btn btn-secondary">&larr; Back</a>
+        <button type="submit" class="btn btn-primary">Next &rarr; Preferences</button>
+      </div>
+
+    </form>
+  </main>
+
+  <script>
+    // Redirect to page 1 if step 1 data is missing
+    if (!sessionStorage.getItem('survey_fullName')) {
+      window.location.href = 'index.html';
+    }
+
+    const form = document.getElementById('step2Form');
+
+    function showError(errId, show) {
+      const errEl = document.getElementById(errId);
+      if (show) errEl.classList.add('visible');
+      else       errEl.classList.remove('visible');
+    }
+
+    // Clear errors on change for radios/select
+    document.querySelectorAll('input[name="frequency"]').forEach(r => {
+      r.addEventListener('change', () => showError('freqError', false));
+    });
+    document.querySelectorAll('input[name="deliveryRating"]').forEach(r => {
+      r.addEventListener('change', () => showError('deliveryRatingError', false));
+    });
+    document.querySelectorAll('input[name="paymentRating"]').forEach(r => {
+      r.addEventListener('change', () => showError('paymentRatingError', false));
+    });
+    document.getElementById('paymentMethod').addEventListener('change', () => {
+      showError('paymentMethodError', false);
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const frequency      = document.querySelector('input[name="frequency"]:checked');
+      const deliveryRating = document.querySelector('input[name="deliveryRating"]:checked');
+      const paymentRating  = document.querySelector('input[name="paymentRating"]:checked');
+      const paymentMethod  = document.getElementById('paymentMethod').value;
+      const deliveryFeedback = document.getElementById('deliveryFeedback').value.trim();
+      const paymentFeedback  = document.getElementById('paymentFeedback').value.trim();
+
+      let valid = true;
+
+      if (!frequency)      { showError('freqError',          true); valid = false; }
+      else                  { showError('freqError',          false); }
+
+      if (!deliveryRating) { showError('deliveryRatingError', true); valid = false; }
+      else                  { showError('deliveryRatingError', false); }
+
+      if (!paymentRating)  { showError('paymentRatingError',  true); valid = false; }
+      else                  { showError('paymentRatingError',  false); }
+
+      if (!paymentMethod)  { showError('paymentMethodError',  true); valid = false; }
+      else                  { showError('paymentMethodError',  false); }
+
+      if (!valid) return;
+
+      sessionStorage.setItem('survey_frequency',       frequency.value);
+      sessionStorage.setItem('survey_deliveryRating',  deliveryRating.value);
+      sessionStorage.setItem('survey_deliveryFeedback', deliveryFeedback);
+      sessionStorage.setItem('survey_paymentRating',   paymentRating.value);
+      sessionStorage.setItem('survey_paymentFeedback',  paymentFeedback);
+      sessionStorage.setItem('survey_paymentMethod',   paymentMethod);
+
+      window.location.href = 'preferences.html';
+    });
+  </script>
+
+</body>
+</html>

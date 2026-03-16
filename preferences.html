@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Online Shopping Survey – Step 3 of 3</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <header class="site-header">
+    <h1>🛒 Online Shopping Survey</h1>
+    <p class="subtitle">Almost done — tell us what you value most!</p>
+
+    <div class="progress-steps" aria-label="Survey progress">
+      <div class="step done">
+        <div class="step-circle">✓</div>
+        <span class="step-label">Your Details</span>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step done">
+        <div class="step-circle">✓</div>
+        <span class="step-label">Shopping Habits</span>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step active">
+        <div class="step-circle">3</div>
+        <span class="step-label">Preferences</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Card ───────────────────────────────────────── -->
+  <main class="card" role="main">
+    <h2 class="card-title">Your Product Preferences</h2>
+    <p class="card-description">
+      Think about items you buy (or consider buying) online. Let us know what you
+      are willing to spend more on and what you'd skip even if it were cheap.
+    </p>
+
+    <form id="step3Form" novalidate>
+
+      <!-- Q1 – Would buy even if expensive -->
+      <div class="form-group">
+        <label>1. Which of these would you buy online even if they are <strong>expensive</strong>?
+          <span class="required">*</span></label>
+        <p style="color:var(--text-muted);font-size:.85rem;margin-bottom:8px">Select all that apply.</p>
+
+        <div class="checkbox-group" id="expensiveGroup">
+          <label class="checkbox-option">
+            <input type="checkbox" name="expensive" value="Smartphone / Laptop" />
+            <span class="option-text">📱 Smartphone / Laptop</span>
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" name="expensive" value="Branded Clothing / Footwear" />
+            <span class="option-text">👕 Branded Clothing &amp; Footwear</span>
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" name="expensive" value="Health & Fitness Equipment" />
+            <span class="option-text">🏋️ Health &amp; Fitness Equipment</span>
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" name="expensive" value="Smart Home Devices" />
+            <span class="option-text">🏠 Smart Home Devices (Smart TV, speakers, etc.)</span>
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" name="expensive" value="Books / Online Courses" />
+            <span class="option-text">📚 Books / Online Courses</span>
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" name="expensive" value="Skincare / Cosmetics" />
+            <span class="option-text">💄 Skincare &amp; Cosmetics</span>
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" name="expensive" value="Jewellery / Watches" />
+            <span class="option-text">💍 Jewellery &amp; Watches</span>
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" name="expensive" value="Organic / Premium Food" />
+            <span class="option-text">🥗 Organic / Premium Food Items</span>
+          </label>
+        </div>
+
+        <!-- Other expensive items -->
+        <div style="margin-top:12px">
+          <label for="expensiveOther">Other (please specify)</label>
+          <input type="text" id="expensiveOther" name="expensiveOther"
+            placeholder="e.g. Gaming accessories, Musical instruments…" maxlength="200" />
+        </div>
+        <p class="error-msg" id="expensiveError">Please select at least one item or specify in 'Other'.</p>
+      </div>
+
+      <!-- Q2 – Would NOT buy even if cheap -->
+      <div class="form-group">
+        <label>2. Which of these would you <strong>NOT</strong> buy online even if they are
+          <strong>very cheap</strong>? <span class="required">*</span></label>
+        <p style="color:var(--text-muted);font-size:.85rem;margin-bottom:8px">Select all that apply.</p>
+
+        <div class="checkbox-group" id="cheapGroup">
+          <label class="checkbox-option">
+            <input type="checkbox" name="notCheap" value="Perishable Food" />
+            <span class="option-text">🥛 Perishable Food (dairy, fruits, vegetables)</span>
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" name="notCheap" value="Prescription Medicine" />
+            <span class="option-text">💊 Prescription Medicine</span>
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" name="notCheap" value="Furniture / Large Appliances" />
+            <span class="option-text">🛋️ Furniture / Large Home Appliances</span>
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" name="notCheap" value="Luxury / High-end Products" />
+            <span class="option-text">👜 Luxury / High-end Products (without verification)</span>
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" name="notCheap" value="Second-hand Goods" />
+            <span class="option-text">♻️ Second-hand / Refurbished Goods</span>
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" name="notCheap" value="Heavy Vehicles / Auto Parts" />
+            <span class="option-text">🚗 Heavy Vehicles / Auto Parts</span>
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" name="notCheap" value="Artisan / Handmade Crafts" />
+            <span class="option-text">🎨 Artisan / Handmade Crafts (prefer local stores)</span>
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" name="notCheap" value="Real Estate / Property" />
+            <span class="option-text">🏡 Real Estate / Property</span>
+          </label>
+        </div>
+
+        <!-- Other not-cheap items -->
+        <div style="margin-top:12px">
+          <label for="notCheapOther">Other (please specify)</label>
+          <input type="text" id="notCheapOther" name="notCheapOther"
+            placeholder="e.g. Tailored clothing, Pets…" maxlength="200" />
+        </div>
+        <p class="error-msg" id="cheapError">Please select at least one item or specify in 'Other'.</p>
+      </div>
+
+      <!-- Q3 – What would improve online shopping for you -->
+      <div class="form-group">
+        <label for="improvements">3. What would most improve your online shopping experience?</label>
+        <textarea
+          id="improvements"
+          name="improvements"
+          rows="3"
+          placeholder="e.g. Better return policy, faster delivery, more secure payments…"
+          maxlength="500"
+        ></textarea>
+      </div>
+
+      <div class="btn-row">
+        <a href="survey.html" class="btn btn-secondary">&larr; Back</a>
+        <button type="submit" class="btn btn-success">✔ Submit Survey</button>
+      </div>
+
+    </form>
+  </main>
+
+  <script>
+    // Redirect to page 1 if earlier steps are missing
+    if (!sessionStorage.getItem('survey_fullName') || !sessionStorage.getItem('survey_frequency')) {
+      window.location.href = 'index.html';
+    }
+
+    const form = document.getElementById('step3Form');
+
+    function showError(errId, show) {
+      const errEl = document.getElementById(errId);
+      if (show) errEl.classList.add('visible');
+      else       errEl.classList.remove('visible');
+    }
+
+    // Clear errors on interaction
+    document.querySelectorAll('input[name="expensive"]').forEach(cb => {
+      cb.addEventListener('change', () => showError('expensiveError', false));
+    });
+    document.getElementById('expensiveOther').addEventListener('input', () => {
+      showError('expensiveError', false);
+    });
+
+    document.querySelectorAll('input[name="notCheap"]').forEach(cb => {
+      cb.addEventListener('change', () => showError('cheapError', false));
+    });
+    document.getElementById('notCheapOther').addEventListener('input', () => {
+      showError('cheapError', false);
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const expensive    = [...document.querySelectorAll('input[name="expensive"]:checked')].map(c => c.value);
+      const expensiveOther = document.getElementById('expensiveOther').value.trim();
+      const notCheap     = [...document.querySelectorAll('input[name="notCheap"]:checked')].map(c => c.value);
+      const notCheapOther  = document.getElementById('notCheapOther').value.trim();
+      const improvements   = document.getElementById('improvements').value.trim();
+
+      let valid = true;
+
+      if (expensive.length === 0 && !expensiveOther) {
+        showError('expensiveError', true); valid = false;
+      } else { showError('expensiveError', false); }
+
+      if (notCheap.length === 0 && !notCheapOther) {
+        showError('cheapError', true); valid = false;
+      } else { showError('cheapError', false); }
+
+      if (!valid) return;
+
+      // Build combined lists
+      const expList  = expensiveOther ? [...expensive, expensiveOther] : expensive;
+      const skipList = notCheapOther  ? [...notCheap,  notCheapOther]  : notCheap;
+
+      sessionStorage.setItem('survey_expensive',    expList.join(', '));
+      sessionStorage.setItem('survey_notCheap',     skipList.join(', '));
+      sessionStorage.setItem('survey_improvements', improvements);
+
+      window.location.href = 'thankyou.html';
+    });
+  </script>
+
+</body>
+</html>
