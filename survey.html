@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Take the Nepal Survey — share your preferences about things in Nepal and help us understand what people love and what needs improvement.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇳🇵</text></svg>">
+  <title>Take Survey — Nepal Survey Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-inner">
+      <div class="header-top">
+        <h1 class="logo">🇳🇵 Nepal Survey Dashboard</h1>
+        <nav class="header-nav" aria-label="Main navigation">
+          <a href="index.html" class="nav-link">📊 Dashboard</a>
+          <a href="survey.html" class="nav-link active" aria-current="page">📝 Take Survey</a>
+        </nav>
+      </div>
+      <p class="subtitle">Share Your Preferences About Nepal</p>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <div class="form-page">
+      <div class="form-card">
+        <!-- Progress Bar -->
+        <div class="progress-bar-wrapper" id="progress-wrapper">
+          <div class="progress-steps">
+            <span class="progress-step active" id="step-label-1">1. Your Info</span>
+            <span class="progress-step" id="step-label-2">2. Preferences</span>
+            <span class="progress-step" id="step-label-3">3. Issues</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="progress-fill" style="width: 33%"></div>
+          </div>
+        </div>
+
+        <form id="survey-form" novalidate>
+          <!-- Step 1: Personal Info -->
+          <div class="form-step" id="step-1">
+            <h2 class="form-title">Your Information</h2>
+            <p class="form-subtitle">Tell us a little about yourself (all fields optional except name).</p>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="full-name">Full Name <span class="required">*</span></label>
+                <input type="text" id="full-name" class="form-control" placeholder="e.g. Ram Sharma" required>
+                <p class="error-message" id="name-error">Please enter your name.</p>
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" class="form-control" placeholder="e.g. ram@example.com">
+                <p class="error-message" id="email-error">Please enter a valid email address.</p>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="age-group">Age Group</label>
+                <select id="age-group" class="form-control">
+                  <option value="">Select age group</option>
+                  <option value="under-18">Under 18</option>
+                  <option value="18-25">18–25</option>
+                  <option value="26-35">26–35</option>
+                  <option value="36-50">36–50</option>
+                  <option value="over-50">Over 50</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="province">Province</label>
+                <select id="province" class="form-control">
+                  <option value="">Select province</option>
+                  <option value="Koshi">Koshi Province</option>
+                  <option value="Madhesh">Madhesh Province</option>
+                  <option value="Bagmati">Bagmati Province</option>
+                  <option value="Gandaki">Gandaki Province</option>
+                  <option value="Lumbini">Lumbini Province</option>
+                  <option value="Karnali">Karnali Province</option>
+                  <option value="Sudurpashchim">Sudurpashchim Province</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>How often do you travel within Nepal?</label>
+              <div class="radio-group">
+                <label class="radio-label">
+                  <input type="radio" name="travel-frequency" value="frequently"> Frequently (monthly)
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="travel-frequency" value="sometimes"> Sometimes (few times a year)
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="travel-frequency" value="rarely"> Rarely (once a year or less)
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="travel-frequency" value="never"> Never traveled much
+                </label>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" class="btn btn-primary" id="next-to-2">Next: Preferences →</button>
+            </div>
+          </div>
+
+          <!-- Step 2: Preferences -->
+          <div class="form-step" id="step-2" style="display:none;">
+            <h2 class="form-title">What You Love About Nepal</h2>
+            <p class="form-subtitle">Select the things you prefer most about Nepal (choose at least 3).</p>
+
+            <p class="form-section-label">🍽️ Food & Drink</p>
+            <div class="checkbox-grid" id="pref-food">
+              <!-- Populated by JS -->
+            </div>
+
+            <hr class="form-divider">
+            <p class="form-section-label">🏔️ Places & Nature</p>
+            <div class="checkbox-grid" id="pref-places">
+              <!-- Populated by JS -->
+            </div>
+
+            <hr class="form-divider">
+            <p class="form-section-label">🎭 Culture & Festivals</p>
+            <div class="checkbox-grid" id="pref-culture">
+              <!-- Populated by JS -->
+            </div>
+
+            <hr class="form-divider">
+            <p class="form-section-label">🧗 Adventure & Tourism</p>
+            <div class="checkbox-grid" id="pref-adventure">
+              <!-- Populated by JS -->
+            </div>
+
+            <p class="error-message" id="pref-error">Please select at least 3 preferences.</p>
+            <div class="form-actions">
+              <button type="button" class="btn btn-secondary" id="back-to-1">← Back</button>
+              <button type="button" class="btn btn-primary" id="next-to-3">Next: Issues →</button>
+            </div>
+          </div>
+
+          <!-- Step 3: Issues -->
+          <div class="form-step" id="step-3" style="display:none;">
+            <h2 class="form-title">What Needs Improvement</h2>
+            <p class="form-subtitle">Select the things you find most problematic in Nepal (choose at least 3).</p>
+
+            <p class="form-section-label">🏗️ Infrastructure</p>
+            <div class="checkbox-grid" id="issue-infra">
+              <!-- Populated by JS -->
+            </div>
+
+            <hr class="form-divider">
+            <p class="form-section-label">🌿 Environment & Health</p>
+            <div class="checkbox-grid" id="issue-env">
+              <!-- Populated by JS -->
+            </div>
+
+            <hr class="form-divider">
+            <p class="form-section-label">🏛️ Governance & Economy</p>
+            <div class="checkbox-grid" id="issue-gov">
+              <!-- Populated by JS -->
+            </div>
+
+            <hr class="form-divider">
+            <p class="form-section-label">👥 Society & Education</p>
+            <div class="checkbox-grid" id="issue-society">
+              <!-- Populated by JS -->
+            </div>
+
+            <hr class="form-divider">
+            <div class="form-group">
+              <label for="additional-comments">Additional Comments</label>
+              <textarea id="additional-comments" class="form-control" rows="4" placeholder="Anything else you'd like to share about Nepal..."></textarea>
+            </div>
+
+            <p class="error-message" id="issue-error">Please select at least 3 issues.</p>
+            <div class="form-actions">
+              <button type="button" class="btn btn-secondary" id="back-to-2">← Back</button>
+              <button type="submit" class="btn btn-primary" id="submit-survey">Submit Survey ✓</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>Nepal Survey Dashboard &copy; 2026 &middot; Your response helps improve Nepal</p>
+    </div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="survey.js"></script>
+</body>
+</html>

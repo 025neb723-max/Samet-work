@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Thank you for completing the Nepal Survey. Your response has been recorded.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇳🇵</text></svg>">
+  <title>Thank You — Nepal Survey Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-inner">
+      <div class="header-top">
+        <h1 class="logo">🇳🇵 Nepal Survey Dashboard</h1>
+        <nav class="header-nav" aria-label="Main navigation">
+          <a href="index.html" class="nav-link">📊 Dashboard</a>
+          <a href="survey.html" class="nav-link">📝 Take Survey</a>
+        </nav>
+      </div>
+      <p class="subtitle">Thank You For Participating</p>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <div class="form-page">
+      <div class="form-card thankyou-card">
+        <div class="thankyou-icon">🎉</div>
+        <h2 class="thankyou-title">Thank You!</h2>
+        <p class="thankyou-message">
+          Your survey response has been recorded successfully.<br>
+          Your voice helps us understand what people in Nepal truly love and what needs improvement.
+        </p>
+
+        <div class="response-summary" id="response-summary">
+          <!-- Populated by JS -->
+        </div>
+
+        <div class="form-actions" style="justify-content:center;">
+          <a href="index.html" class="btn btn-primary" style="text-decoration:none;text-align:center;">📊 View Dashboard Results</a>
+          <a href="survey.html" class="btn btn-secondary" style="text-decoration:none;text-align:center;">📝 Take Another Survey</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>Nepal Survey Dashboard &copy; 2026 &middot; Data from large-scale nationwide survey</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      "use strict";
+
+      // Dark mode
+      var themeToggle = document.getElementById("theme-toggle");
+      var saved = localStorage.getItem("nepal-survey-theme");
+      if (saved === "dark") {
+        document.documentElement.setAttribute("data-theme", "dark");
+        themeToggle.textContent = "☀️";
+      }
+      themeToggle.addEventListener("click", function () {
+        var isDark = document.documentElement.getAttribute("data-theme") === "dark";
+        if (isDark) {
+          document.documentElement.removeAttribute("data-theme");
+          themeToggle.textContent = "🌙";
+          localStorage.setItem("nepal-survey-theme", "light");
+        } else {
+          document.documentElement.setAttribute("data-theme", "dark");
+          themeToggle.textContent = "☀️";
+          localStorage.setItem("nepal-survey-theme", "dark");
+        }
+      });
+
+      // Load response summary from sessionStorage
+      var summary = document.getElementById("response-summary");
+      var responseData = sessionStorage.getItem("nepal-survey-response");
+
+      if (responseData) {
+        var data = JSON.parse(responseData);
+        var html = "<h3>Your Response Summary</h3>";
+
+        if (data.name) {
+          html += '<div class="response-item"><span class="response-label">Name</span><span class="response-value">' +
+            escapeHtml(data.name) + "</span></div>";
+        }
+        if (data.province) {
+          html += '<div class="response-item"><span class="response-label">Province</span><span class="response-value">' +
+            escapeHtml(data.province) + "</span></div>";
+        }
+        if (data.ageGroup) {
+          html += '<div class="response-item"><span class="response-label">Age Group</span><span class="response-value">' +
+            escapeHtml(data.ageGroup) + "</span></div>";
+        }
+        if (data.preferences && data.preferences.length > 0) {
+          html += '<div class="response-item"><span class="response-label">Things You Love</span><span class="response-value">' +
+            data.preferences.length + " items selected</span></div>";
+        }
+        if (data.issues && data.issues.length > 0) {
+          html += '<div class="response-item"><span class="response-label">Issues Identified</span><span class="response-value">' +
+            data.issues.length + " items selected</span></div>";
+        }
+
+        summary.innerHTML = html;
+      } else {
+        summary.innerHTML = '<h3>No Response Found</h3><p style="color:var(--text-secondary);font-size:0.9rem;">It looks like you haven\'t submitted a survey yet.</p>';
+      }
+
+      function escapeHtml(text) {
+        var div = document.createElement("div");
+        div.textContent = text;
+        return div.innerHTML;
+      }
+    })();
+  </script>
+</body>
+</html>

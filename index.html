@@ -3,91 +3,122 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Large-scale survey dashboard showing the Top 50 Preferred and Top 50 Not Preferable things in Nepal. 52,480 respondents across 77 districts.">
+  <meta property="og:title" content="Nepal Survey Dashboard — Top 50 Preferences">
+  <meta property="og:description" content="Explore what Nepalis love and what needs improvement — based on 52,480 survey respondents across all 77 districts.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇳🇵</text></svg>">
   <title>Nepal Survey Dashboard — Top 50 Preferences</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- Skip to content for accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <!-- Header -->
   <header class="header">
     <div class="container header-inner">
-      <h1 class="logo">🇳🇵 Nepal Survey Dashboard</h1>
+      <div class="header-top">
+        <h1 class="logo">🇳🇵 Nepal Survey Dashboard</h1>
+        <nav class="header-nav" aria-label="Main navigation">
+          <a href="index.html" class="nav-link active" aria-current="page">📊 Dashboard</a>
+          <a href="survey.html" class="nav-link">📝 Take Survey</a>
+        </nav>
+      </div>
       <p class="subtitle">Large-Scale Survey &middot; Top 50 Preferred &amp; Not Preferable Things</p>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
     </div>
   </header>
 
   <!-- Stats Bar -->
-  <section class="stats-bar" id="stats-bar">
+  <section class="stats-bar" id="stats-bar" aria-label="Survey statistics">
     <!-- Populated by JS -->
   </section>
 
-  <!-- Controls -->
-  <section class="container controls">
-    <div class="search-box">
-      <input type="text" id="search-input" placeholder="Search items..." aria-label="Search items">
-    </div>
-    <div class="filter-group">
-      <label for="category-filter">Category:</label>
-      <select id="category-filter" aria-label="Filter by category">
-        <option value="all">All Categories</option>
-      </select>
-    </div>
-    <div class="filter-group">
-      <label for="trend-filter">Trend:</label>
-      <select id="trend-filter" aria-label="Filter by trend">
-        <option value="all">All Trends</option>
-        <option value="up">↑ Trending Up</option>
-        <option value="down">↓ Trending Down</option>
-        <option value="stable">→ Stable</option>
-      </select>
-    </div>
-  </section>
-
-  <!-- Tab Navigation -->
-  <section class="container">
-    <div class="tabs" role="tablist">
-      <button class="tab active" role="tab" aria-selected="true" data-tab="preferred" id="tab-preferred">
-        👍 Top 50 Preferred
-      </button>
-      <button class="tab" role="tab" aria-selected="false" data-tab="not-preferable" id="tab-not-preferable">
-        👎 Top 50 Not Preferable
-      </button>
-    </div>
-  </section>
-
-  <!-- Chart Section -->
-  <section class="container">
-    <div class="chart-section">
-      <h2 id="chart-title" class="section-title">Top 10 Preferred — Score Overview</h2>
-      <div class="chart" id="bar-chart" role="img" aria-label="Bar chart showing top 10 items by score">
-        <!-- Populated by JS -->
+  <main id="main-content">
+    <!-- Controls -->
+    <section class="container controls">
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="Search items..." aria-label="Search items">
       </div>
-    </div>
-  </section>
-
-  <!-- Table Section -->
-  <section class="container">
-    <div class="table-section">
-      <h2 id="table-title" class="section-title">All 50 Preferred Items</h2>
-      <div class="table-wrapper">
-        <table id="data-table" aria-label="Survey results table">
-          <thead>
-            <tr>
-              <th class="sortable" data-sort="rank">Rank</th>
-              <th class="sortable" data-sort="name">Name</th>
-              <th class="sortable" data-sort="category">Category</th>
-              <th class="sortable" data-sort="score">Score</th>
-              <th class="sortable" data-sort="votes">Votes</th>
-              <th class="sortable" data-sort="trend">Trend</th>
-            </tr>
-          </thead>
-          <tbody id="table-body">
-            <!-- Populated by JS -->
-          </tbody>
-        </table>
+      <div class="filter-group">
+        <label for="category-filter">Category:</label>
+        <select id="category-filter" aria-label="Filter by category">
+          <option value="all">All Categories</option>
+        </select>
       </div>
-      <p class="showing-count" id="showing-count"></p>
-    </div>
-  </section>
+      <div class="filter-group">
+        <label for="trend-filter">Trend:</label>
+        <select id="trend-filter" aria-label="Filter by trend">
+          <option value="all">All Trends</option>
+          <option value="up">↑ Trending Up</option>
+          <option value="down">↓ Trending Down</option>
+          <option value="stable">→ Stable</option>
+        </select>
+      </div>
+      <button class="btn btn-export" id="export-csv" aria-label="Export data as CSV">⬇ Export CSV</button>
+    </section>
+
+    <!-- Tab Navigation -->
+    <section class="container">
+      <div class="tabs" role="tablist">
+        <button class="tab active" role="tab" aria-selected="true" data-tab="preferred" id="tab-preferred">
+          👍 Top 50 Preferred
+        </button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="not-preferable" id="tab-not-preferable">
+          👎 Top 50 Not Preferable
+        </button>
+      </div>
+    </section>
+
+    <!-- Category Breakdown -->
+    <section class="container">
+      <div class="category-summary" id="category-summary">
+        <h2 class="section-title">Category Breakdown</h2>
+        <div class="category-grid" id="category-grid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Chart Section -->
+    <section class="container">
+      <div class="chart-section">
+        <h2 id="chart-title" class="section-title">Top 10 Preferred — Score Overview</h2>
+        <div class="chart" id="bar-chart" role="img" aria-label="Bar chart showing top 10 items by score">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Table Section -->
+    <section class="container">
+      <div class="table-section">
+        <h2 id="table-title" class="section-title">All 50 Preferred Items</h2>
+        <div class="table-wrapper">
+          <table id="data-table" aria-label="Survey results table">
+            <thead>
+              <tr>
+                <th class="sortable" data-sort="rank">Rank</th>
+                <th class="sortable" data-sort="name">Name</th>
+                <th class="sortable" data-sort="category">Category</th>
+                <th class="sortable" data-sort="score">Score</th>
+                <th class="sortable" data-sort="votes">Votes</th>
+                <th class="sortable" data-sort="trend">Trend</th>
+              </tr>
+            </thead>
+            <tbody id="table-body">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+        </div>
+        <p class="showing-count" id="showing-count"></p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Scroll to top -->
+  <button class="scroll-top" id="scroll-top" aria-label="Scroll to top" title="Back to top">↑</button>
 
   <!-- Footer -->
   <footer class="footer">
