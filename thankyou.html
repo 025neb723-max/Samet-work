@@ -54,10 +54,7 @@
       <div id="summaryContent"><!-- filled by JS --></div>
     </div>
 
-    <div class="btn-row" style="justify-content:center">
-      <button id="printBtn" class="btn btn-secondary">🖨️ Print / Save PDF</button>
-      <button id="restartBtn" class="btn btn-primary">↩ Take Survey Again</button>
-    </div>
+    <p class="close-msg">Your response has been recorded.<br>You can now close this window.</p>
   </main>
 
   <script>
@@ -103,14 +100,8 @@
         .replace(/"/g, '&quot;');
     }
 
-    document.getElementById('printBtn').addEventListener('click', () => {
-      window.print();
-    });
-
-    document.getElementById('restartBtn').addEventListener('click', () => {
-      sessionStorage.clear();
-      window.location.href = 'index.html';
-    });
+    // Clear session data after displaying summary
+    sessionStorage.clear();
   </script>
 
 </body>
