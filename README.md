@@ -1,2 +1,2 @@
-# Samet-work
-It is about games 
+# survey
+It is about information 
