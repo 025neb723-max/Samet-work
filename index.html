@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Online Shopping Survey – Step 1 of 3</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <header class="site-header">
+    <h1>🛒 Online Shopping Survey</h1>
+    <p class="subtitle">Help us understand your online shopping habits — takes only 3 minutes!</p>
+
+    <div class="progress-steps" aria-label="Survey progress">
+      <div class="step active">
+        <div class="step-circle">1</div>
+        <span class="step-label">Your Details</span>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step">
+        <div class="step-circle">2</div>
+        <span class="step-label">Shopping Habits</span>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step">
+        <div class="step-circle">3</div>
+        <span class="step-label">Preferences</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Card ───────────────────────────────────────── -->
+  <main class="card" role="main">
+    <h2 class="card-title">Personal Information</h2>
+    <p class="card-description">
+      Please fill in your basic details below. All fields marked with
+      <span style="color:var(--danger)">*</span> are required.
+    </p>
+
+    <form id="step1Form" novalidate>
+
+      <!-- Full Name -->
+      <div class="form-group">
+        <label for="fullName">Full Name <span class="required">*</span></label>
+        <input
+          type="text"
+          id="fullName"
+          name="fullName"
+          placeholder="e.g. Rahul Sharma"
+          autocomplete="name"
+          maxlength="100"
+        />
+        <p class="error-msg" id="fullNameError">Please enter your full name.</p>
+      </div>
+
+      <!-- College / Institution -->
+      <div class="form-group">
+        <label for="college">College / Institution <span class="required">*</span></label>
+        <input
+          type="text"
+          id="college"
+          name="college"
+          placeholder="e.g. IIT Bombay"
+          autocomplete="organization"
+          maxlength="150"
+        />
+        <p class="error-msg" id="collegeError">Please enter your college or institution name.</p>
+      </div>
+
+      <!-- Address -->
+      <div class="form-group">
+        <label for="address">Address <span class="required">*</span></label>
+        <textarea
+          id="address"
+          name="address"
+          rows="3"
+          placeholder="House No., Street, City, State, PIN"
+          autocomplete="street-address"
+          maxlength="300"
+        ></textarea>
+        <p class="error-msg" id="addressError">Please enter your address.</p>
+      </div>
+
+      <!-- Email (optional) -->
+      <div class="form-group">
+        <label for="email">Email Address <span style="color:var(--text-muted);font-weight:400">(optional)</span></label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="you@example.com"
+          autocomplete="email"
+          maxlength="150"
+        />
+        <p class="error-msg" id="emailError">Please enter a valid email address.</p>
+      </div>
+
+      <div class="btn-row">
+        <span></span><!-- spacer -->
+        <button type="submit" class="btn btn-primary">
+          Next &rarr; Shopping Habits
+        </button>
+      </div>
+
+    </form>
+  </main>
+
+  <script>
+    const form = document.getElementById('step1Form');
+
+    function showError(inputId, errorId, show) {
+      const input = document.getElementById(inputId);
+      const error = document.getElementById(errorId);
+      if (show) {
+        input.classList.add('error');
+        error.classList.add('visible');
+      } else {
+        input.classList.remove('error');
+        error.classList.remove('visible');
+      }
+    }
+
+    // Live clear-on-input
+    ['fullName', 'college', 'address', 'email'].forEach(id => {
+      const el = document.getElementById(id);
+      el.addEventListener('input', () => {
+        el.classList.remove('error');
+        const errEl = document.getElementById(id + 'Error');
+        if (errEl) errEl.classList.remove('visible');
+      });
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const fullName = document.getElementById('fullName').value.trim();
+      const college  = document.getElementById('college').value.trim();
+      const address  = document.getElementById('address').value.trim();
+      const email    = document.getElementById('email').value.trim();
+
+      let valid = true;
+
+      if (!fullName) { showError('fullName', 'fullNameError', true);  valid = false; }
+      else            { showError('fullName', 'fullNameError', false); }
+
+      if (!college)  { showError('college',  'collegeError',  true);  valid = false; }
+      else            { showError('college',  'collegeError',  false); }
+
+      if (!address)  { showError('address',  'addressError',  true);  valid = false; }
+      else            { showError('address',  'addressError',  false); }
+
+      if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showError('email', 'emailError', true);
+        valid = false;
+      } else {
+        showError('email', 'emailError', false);
+      }
+
+      if (!valid) return;
+
+      // Save to sessionStorage and go to page 2
+      sessionStorage.setItem('survey_fullName', fullName);
+      sessionStorage.setItem('survey_college',  college);
+      sessionStorage.setItem('survey_address',  address);
+      sessionStorage.setItem('survey_email',    email);
+
+      window.location.href = 'survey.html';
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thank You – Online Shopping Survey</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Animated check-mark */
+    @keyframes pop { 0%{transform:scale(0)} 70%{transform:scale(1.15)} 100%{transform:scale(1)} }
+    .thankyou-icon { animation: pop .5s ease forwards; }
+  </style>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <header class="site-header">
+    <h1>🛒 Online Shopping Survey</h1>
+    <p class="subtitle">Survey completed — thank you for your time!</p>
+
+    <div class="progress-steps" aria-label="Survey progress">
+      <div class="step done">
+        <div class="step-circle">✓</div>
+        <span class="step-label">Your Details</span>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step done">
+        <div class="step-circle">✓</div>
+        <span class="step-label">Shopping Habits</span>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step done">
+        <div class="step-circle">✓</div>
+        <span class="step-label">Preferences</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Card ───────────────────────────────────────── -->
+  <main class="card" role="main">
+    <div class="thankyou-wrap">
+      <div class="thankyou-icon" aria-hidden="true">🎉</div>
+      <h2>Thank You for Participating!</h2>
+      <p>
+        Your responses have been recorded. We appreciate you sharing your online
+        shopping habits and preferences. Your feedback helps us build better
+        experiences for everyone.
+      </p>
+    </div>
+
+    <!-- Response summary -->
+    <div class="summary-box" id="summaryBox">
+      <h3>📋 Your Responses at a Glance</h3>
+      <div id="summaryContent"><!-- filled by JS --></div>
+    </div>
+
+    <div class="btn-row" style="justify-content:center">
+      <button id="printBtn" class="btn btn-secondary">🖨️ Print / Save PDF</button>
+      <button id="restartBtn" class="btn btn-primary">↩ Take Survey Again</button>
+    </div>
+  </main>
+
+  <script>
+    // Redirect if survey was not completed
+    if (!sessionStorage.getItem('survey_fullName')) {
+      window.location.href = 'index.html';
+    }
+
+    const keys = [
+      { key: 'survey_fullName',        label: 'Full Name' },
+      { key: 'survey_college',         label: 'College / Institution' },
+      { key: 'survey_address',         label: 'Address' },
+      { key: 'survey_email',           label: 'Email' },
+      { key: 'survey_frequency',       label: 'Shopping Frequency' },
+      { key: 'survey_deliveryRating',  label: 'Delivery Rating (out of 5)' },
+      { key: 'survey_deliveryFeedback',label: 'Delivery Feedback' },
+      { key: 'survey_paymentRating',   label: 'Payment Rating (out of 5)' },
+      { key: 'survey_paymentFeedback', label: 'Payment Feedback' },
+      { key: 'survey_paymentMethod',   label: 'Preferred Payment Method' },
+      { key: 'survey_expensive',       label: 'Would buy even if expensive' },
+      { key: 'survey_notCheap',        label: 'Would NOT buy even if cheap' },
+      { key: 'survey_improvements',    label: 'Suggested Improvements' },
+    ];
+
+    const container = document.getElementById('summaryContent');
+
+    keys.forEach(({ key, label }) => {
+      const raw   = sessionStorage.getItem(key);
+      if (!raw && key === 'survey_email') return; // skip blank optional email
+      const value = raw || '—';
+
+      const row = document.createElement('div');
+      row.className = 'summary-row';
+      row.innerHTML = `<span class="s-label">${label}</span><span class="s-value">${escapeHtml(value)}</span>`;
+      container.appendChild(row);
+    });
+
+    function escapeHtml(str) {
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    document.getElementById('printBtn').addEventListener('click', () => {
+      window.print();
+    });
+
+    document.getElementById('restartBtn').addEventListener('click', () => {
+      sessionStorage.clear();
+      window.location.href = 'index.html';
+    });
+  </script>
+
+</body>
+</html>
